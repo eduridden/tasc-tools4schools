@@ -1,0 +1,44 @@
+# Settings to manage and configure a Firebase App Hosting backend.
+# https://firebase.google.com/docs/app-hosting/configure
+
+# Specifies the node version to use. Pinned to the active LTS line — non-LTS
+# Node majors lose security backports much faster than the project's release
+# cadence can absorb.
+runtime: nodejs22
+
+# A list of secrets from Google Secret Manager to make available as
+# environment variables in the production environment.
+#
+# Naming conventions:
+# - The secret name must be a valid environment variable name.
+# - The secret value will be the value of the environment variable.
+#
+# Secrets can be created and managed using the Google Cloud CLI.
+# For example, to create a secret, run the following command:
+#
+#   gcloud secrets create GEMINI_API_KEY --replication-policy="automatic"
+#   printf "my-api-key" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
+#
+# To grant your principal access to the secret, run the following command:
+#
+#   gcloud secrets add-iam-policy-binding GEMINI_API_KEY \
+#     --member="principal:my-principal@example.com" \
+#     --role="roles/secretmanager.secretAccessor"
+#
+# For more information, see the Google Secret Manager documentation:
+# https://cloud.google.com/secret-manager
+#
+env:
+  - secret: GEMINI_API_KEY
+
+runConfig:
+  # Increase this value if you'd like to automatically spin up
+  # more instances in response to increased traffic.
+  maxInstances: 3
+auth:
+  # Explicit allowlist only — no wildcards (which would permit any tenant of
+  # Google's shared App Hosting / Cloud Workstations domains to act as an
+  # authorised redirect target for Firebase Auth — phishing surface).
+  # Add additional production hostnames here as needed.
+  authorizedDomains:
+    - "tools4schools.tasc.nsw.edu.au"

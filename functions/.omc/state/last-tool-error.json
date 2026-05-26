@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd functions && grep -B1 -A3 '\\\"firebase-functions\\\": ' package-lock.json | head -20\",\"description\":\"Inspect lockfile entries for firebase-functions\"}",
+  "error": "Exit code 1\n(eval):cd:1: no such file or directory: functions",
+  "timestamp": "2026-05-26T03:03:28.380Z",
+  "retry_count": 1
+}

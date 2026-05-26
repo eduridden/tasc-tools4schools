@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      // Admin check uses Firebase Auth custom claims, NOT the Firestore `role` field.
+      // The `role` field on user docs is informational only — it must never be the
+      // basis of an authorisation decision client- or server-side.
+      return request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Site-wide settings — public read, admin write.
+    match /site_settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Tool listings — public read, admin write.
+    match /ai_tools/{toolId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Teacher reviews — doc id MUST equal auth.uid (one review per user per tool),
+    // and the userId field must match. Public read.
+    match /ai_tools/{toolId}/reviews/{reviewId} {
+      allow read: if true;
+      allow create, update: if isSignedIn()
+        && request.auth.uid == reviewId
+        && request.resource.data.userId == request.auth.uid;
+      allow delete: if (isSignedIn() && request.auth.uid == reviewId) || isAdmin();
+    }
+
+    // Taxonomy collections — public read, admin write.
+    match /tool_categories/{catId}   { allow read: if true; allow write: if isAdmin(); }
+    match /subject_areas/{subId}     { allow read: if true; allow write: if isAdmin(); }
+    match /target_audiences/{audId}  { allow read: if true; allow write: if isAdmin(); }
+
+    // User docs.
+    // Read: any signed-in user (for showing reviewer/avatar in reviews).
+    // Create: a user can create their own doc but cannot set `role`.
+    // Update: a user can update only the whitelisted self-service fields on their
+    //         own doc. Admins can update any user doc (including `role` — though
+    //         the authoritative role is the custom claim, not this field).
+    match /users/{userId} {
+      allow read: if isSignedIn();
+
+      allow create: if isSignedIn()
+        && request.auth.uid == userId
+        && !('role' in request.resource.data);
+
+      allow update: if isAdmin()
+        || (
+          isSignedIn()
+          && request.auth.uid == userId
+          && request.resource.data.diff(resource.data).affectedKeys()
+              .hasOnly(['avatarUrl', 'bio', 'photoURL', 'displayName',
+                        'firstName', 'lastName', 'email'])
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    // Per-uid daily rate-limit counters for AI / submitTool spend control.
+    // Owner reads (debug), only Cloud Functions (Admin SDK) writes.
+    match /rate_limits/{uid}/{document=**} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}

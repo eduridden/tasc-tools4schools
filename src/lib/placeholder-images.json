@@ -1,0 +1,52 @@
+{
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "A screenshot of the MagicSchool AI platform showing various tools for educators.",
+      "imageUrl": "https://images.unsplash.com/photo-1567775454727-7754556725f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxBSSUyMGRhc2hib2FyZHxlbnwwfHx8fDE3NjMwMDQ1ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "AI dashboard"
+    },
+    {
+      "id": "2",
+      "description": "A screenshot of the Tome app interface, displaying a presentation being created.",
+      "imageUrl": "https://images.unsplash.com/photo-1590097520505-416422f07ad1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcmVzZW50YXRpb24lMjBzbGlkZXxlbnwwfHx8fDE3NjI5NTg1MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "presentation slide"
+    },
+    {
+      "id": "3",
+      "description": "A screenshot of the Suno AI music creation interface.",
+      "imageUrl": "https://images.unsplash.com/photo-1661922030014-34ba8b3b1266?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMGNyZWF0aW9ufGVufDB8fHx8MTc2MzAwNDU4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music creation"
+    },
+    {
+      "id": "4",
+      "description": "A screenshot of the Perplexity AI search interface showing a search result with sources.",
+      "imageUrl": "https://images.unsplash.com/photo-1674027001840-1a3e834eb73f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c2VhcmNoJTIwZW5naW5lfGVufDB8fHx8MTc2Mjk2NTk2Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "search engine"
+    },
+    {
+      "id": "5",
+      "description": "A screenshot of a Curipod interactive lesson with a poll.",
+      "imageUrl": "https://images.unsplash.com/photo-1758687125988-29bd184f0d09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbnRlcmFjdGl2ZSUyMGxlc3NvbnxlbnwwfHx8fDE3NjMwMDQ1ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "interactive lesson"
+    },
+    {
+      "id": "6",
+      "description": "A screenshot of Diffit showing text being adapted for different reading levels.",
+      "imageUrl": "https://picsum.photos/seed/diffit/1280/720",
+      "imageHint": "text adaptation"
+    },
+    {
+      "id": "7",
+      "description": "A screenshot of Khanmigo, the Khan Academy AI tutor, assisting a student.",
+      "imageUrl": "https://picsum.photos/seed/khanmigo/1280/720",
+      "imageHint": "AI tutor"
+    },
+    {
+      "id": "8",
+      "description": "A screenshot of Canva's Magic Studio showing AI-powered design tools.",
+      "imageUrl": "https://images.unsplash.com/photo-1709803312782-0c3b175875ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkZXNpZ24lMjB0b29sfGVufDB8fHx8MTc2MjkxOTU3OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "design tool"
+    }
+  ]
+}

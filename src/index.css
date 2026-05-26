@@ -1,0 +1,264 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+/* ── Container centering (Tailwind v4 does not auto-center containers) ── */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 80rem; /* 1280px — matches Tailwind xl breakpoint */
+}
+@plugin "daisyui/theme" {
+  name: "tasc";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* TASC brand palette */
+  --color-base-100: oklch(98% 0.01 245);
+  --color-base-200: oklch(95% 0.02 245);
+  --color-base-300: oklch(91% 0.03 245);
+  --color-base-content: oklch(18% 0.05 245);
+
+  --color-primary: oklch(40% 0.22 265);
+  --color-primary-content: oklch(98% 0.01 265);
+
+  --color-secondary: oklch(58% 0.18 240);
+  --color-secondary-content: oklch(98% 0.01 240);
+
+  --color-accent: oklch(55% 0.22 260);
+  --color-accent-content: oklch(98% 0.01 260);
+
+  --color-neutral: oklch(45% 0.05 245);
+  --color-neutral-content: oklch(98% 0.01 245);
+
+  --color-info: oklch(65% 0.18 220);
+  --color-info-content: oklch(98% 0.01 220);
+
+  --color-success: oklch(60% 0.22 145);
+  --color-success-content: oklch(98% 0.01 145);
+
+  --color-warning: oklch(75% 0.22 75);
+  --color-warning-content: oklch(20% 0.05 75);
+
+  --color-error: oklch(60% 0.25 25);
+  --color-error-content: oklch(98% 0.01 25);
+
+  --radius-selector: 2rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+@plugin "daisyui";
+
+/* ── Animated gradient utility ── */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ── Floating cubes animation ── */
+@keyframes float-cube {
+  0% {
+    bottom: -120px;
+    transform: rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% {
+    bottom: 110%;
+    transform: rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.floating-cube {
+  position: absolute;
+  bottom: -120px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  animation: float-cube linear infinite;
+  backdrop-filter: blur(1px);
+}
+
+.animate-gradient-hero {
+  background: linear-gradient(
+    -45deg,
+    oklch(25% 0.28 275),
+    oklch(40% 0.22 265),
+    oklch(30% 0.25 280),
+    oklch(45% 0.20 250)
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 12s ease infinite;
+}
+
+.animate-gradient-danger {
+  background: linear-gradient(
+    -45deg,
+    oklch(45% 0.22 40),
+    oklch(60% 0.25 55),
+    oklch(50% 0.28 30),
+    oklch(55% 0.20 20)
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-body: PT Sans, sans-serif;
+  --font-headline: PT Sans, sans-serif;
+  --font-code: monospace;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer base {
+  :root {
+    --background: 210 100% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}

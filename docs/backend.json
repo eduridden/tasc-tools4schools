@@ -1,0 +1,418 @@
+
+{
+  "entities": {
+    "AiTool": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AiTool",
+      "type": "object",
+      "description": "Represents an AI tool available for educators.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AI tool."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AI tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the AI tool."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the AI tool.",
+          "format": "uri"
+        },
+        "logoUrl": {
+          "type": "string",
+          "description": "URL of the AI tool's logo.",
+          "format": "uri"
+        },
+        "toolCategoryIds": {
+          "type": "array",
+          "description": "References to ToolCategories. (Relationship: AiTool N:N ToolCategory)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "costModel": {
+          "type": "string",
+          "enum": [
+            "Free",
+            "Freemium",
+            "Subscription"
+          ],
+          "description": "Cost model of the AI tool."
+        },
+        "ageRestriction": {
+          "type": "string",
+          "enum": [
+            "All Ages",
+            "13+",
+            "16+",
+            "18+"
+          ],
+          "description": "Age restriction for the AI tool."
+        },
+        "status": {
+          "type": "string",
+          "description": "The approval status of the AI tool.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected"
+          ]
+        },
+        "youtubeVideoUrl": {
+          "type": "string",
+          "description": "URL of a YouTube video about the AI tool.",
+          "format": "uri"
+        },
+        "documentationUrl": {
+          "type": "string",
+          "description": "URL of the AI tool's documentation.",
+          "format": "uri"
+        },
+        "trainingUrl": {
+          "type": "string",
+          "description": "URL for training resources for the AI tool.",
+          "format": "uri"
+        },
+        "subjectAreaIds": {
+          "type": "array",
+          "description": "References to SubjectAreas. (Relationship: AiTool N:N SubjectArea)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetAudienceIds": {
+          "type": "array",
+          "description": "References to TargetAudiences. (Relationship: AiTool N:N TargetAudience)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommended": {
+          "type": "boolean",
+          "description": "Indicates if the tool is recommended by administrators."
+        },
+        "unsafeDataPractices": {
+          "type": "boolean",
+          "description": "Indicates if the tool may train or learn off of user data."
+        },
+        "createdForTasc": {
+          "type": "boolean",
+          "description": "Indicates if the tool was created specifically for TASC Schools."
+        },
+        "screenshotUrls": {
+          "type": "array",
+          "description": "A list of URLs for tool screenshots.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "defaultIdea": {
+          "type": "string",
+          "description": "An admin-curated, default classroom idea for this tool."
+        },
+        "vettingNotes": {
+            "type": "string",
+            "description": "Administrator-only notes from the AI vetting process."
+        },
+        "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the tool was first added."
+        },
+        "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the tool was last updated."
+        }
+      },
+      "required": [
+        "name",
+        "url",
+        "logoUrl",
+        "toolCategoryIds",
+        "costModel",
+        "status",
+        "subjectAreaIds",
+        "targetAudienceIds"
+      ]
+    },
+    "ToolCategory": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ToolCategory",
+      "type": "object",
+      "description": "Represents a category for an AI tool.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the category."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the category (e.g., Content Creation, Lesson Planning)."
+        },
+        "description": {
+          "type": "string",
+          "description": "A short description of the category."
+        },
+        "color": {
+          "type": "string",
+          "description": "A pastel color code for UI display."
+        },
+        "icon": {
+          "type": "string",
+          "description": "The name of the lucide-react icon to display."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color",
+        "icon"
+      ]
+    },
+    "SubjectArea": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SubjectArea",
+      "type": "object",
+      "description": "Represents a subject area for AI tools.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the subject area."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the subject area (e.g., Mathematics, Languages)."
+        },
+        "color": {
+          "type": "string",
+          "description": "A pastel color code for UI display."
+        },
+        "icon": {
+          "type": "string",
+          "description": "The name of the lucide-react icon to display."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color",
+        "icon"
+      ]
+    },
+    "TargetAudience": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "TargetAudience",
+      "type": "object",
+      "description": "Represents a target audience for AI tools.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the target audience."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the target audience (e.g., Teachers, Students)."
+        },
+        "color": {
+          "type": "string",
+          "description": "A pastel color code for UI display."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color"
+      ]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Represents a user's profile information.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "photoURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the user's profile picture."
+        },
+        "role": {
+          "type": "string",
+          "description": "The user's role in the application.",
+          "enum": [
+            "user",
+            "admin"
+          ]
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "SiteSettings": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SiteSettings",
+      "type": "object",
+      "description": "Stores global site settings like title, subtitle, and access rules.",
+      "properties": {
+        "siteName": {
+          "type": "string",
+          "description": "The main title of the website."
+        },
+        "siteSubtitle": {
+          "type": "string",
+          "description": "The subtitle or tagline displayed in the header."
+        },
+        "allowToolSubmission": {
+          "type": "boolean",
+          "description": "If true, non-admin users can submit new tools for approval."
+        },
+        "allowedDomains": {
+          "type": "array",
+          "description": "A list of email domains that are allowed to sign up or log in.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requireLogin": {
+          "type": "boolean",
+          "description": "If true, users must be logged in to view the tool directory."
+        }
+      },
+      "required": [
+        "siteName",
+        "siteSubtitle"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "saml.tasc-aitools4schools"
+    ],
+    "customClaims": {
+      "role": {
+        "type": "string",
+        "enum": [
+          "user",
+          "admin"
+        ]
+      }
+    }
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "UserProfile",
+          "schema": {
+            "$ref": "#/backend/entities/UserProfile"
+          },
+          "description": "Stores public information about a user's profile.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique ID of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/ai_tools/{aiToolId}",
+        "definition": {
+          "entityName": "AiTool",
+          "schema": {
+            "$ref": "#/backend/entities/AiTool"
+          },
+          "description": "Stores AI tool details. Includes references to ToolCategories, SubjectAreas, and TargetAudiences.",
+          "params": [
+            {
+              "name": "aiToolId",
+              "description": "Unique identifier for the AI tool."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/tool_categories/{toolCategoryId}",
+        "definition": {
+          "entityName": "ToolCategory",
+          "schema": {
+            "$ref": "#/backend/entities/ToolCategory"
+          },
+          "description": "Stores category details for AI tools.",
+          "params": [
+            {
+              "name": "toolCategoryId",
+              "description": "Unique identifier for the tool category."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/subject_areas/{subjectAreaId}",
+        "definition": {
+          "entityName": "SubjectArea",
+          "schema": {
+            "$ref": "#/backend/entities/SubjectArea"
+          },
+          "description": "Stores subject area details for AI tools.",
+          "params": [
+            {
+              "name": "subjectAreaId",
+              "description": "Unique identifier for the subject area."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/target_audiences/{targetAudienceId}",
+        "definition": {
+          "entityName": "TargetAudience",
+          "schema": {
+            "$ref": "#/backend/entities/TargetAudience"
+          },
+          "description": "Stores target audience details for AI tools.",
+          "params": [
+            {
+              "name": "targetAudienceId",
+              "description": "Unique identifier for the target audience."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/site_settings/{settingsId}",
+        "definition": {
+          "entityName": "SiteSettings",
+          "schema": {
+            "$ref": "#/backend/entities/SiteSettings"
+          },
+          "description": "Stores global configuration for the site. Expects a single document with a known ID (e.g., 'config').",
+          "params": [
+            {
+              "name": "settingsId",
+              "description": "The unique ID for the settings document (e.g., 'config')."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to efficiently store and retrieve AI tool information, optimized for the EdTech AI Toolkit application. It leverages structural segregation by storing different entity types (AiTool, ToolCategory, SubjectArea, TargetAudience, UserProfile, SiteSettings) in separate collections. This promotes rule clarity and maintainability. To enable efficient filtering and searching by category, subject area, and target audience, the `AiTool` document includes arrays of references (IDs) to documents in the `ToolCategories`, `SubjectAreas`, and `TargetAudiences` collections respectively. The `users` collection stores profile information linked to authenticated users. A single-document collection `site_settings` is used for global configuration that can be managed by admins.\n\n**Authorization Independence:** The rules differentiate between general authenticated users and admins. All authenticated users can read data, but only admins can write data. This separation is managed through security rules based on user roles (custom claims or specific user IDs)."
+  }
+}

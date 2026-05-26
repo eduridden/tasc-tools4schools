@@ -1,0 +1,12 @@
+[
+  {
+    "origin": [
+      "https://tools4schools.tasc.nsw.edu.au",
+      "http://localhost:5173",
+      "http://localhost:4173"
+    ],
+    "method": ["GET", "HEAD", "PUT", "POST"],
+    "maxAgeSeconds": 3600,
+    "responseHeader": ["Content-Type", "Authorization", "Content-Length", "X-Requested-With"]
+  }
+]

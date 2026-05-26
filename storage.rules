@@ -1,0 +1,44 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isSafeImage() {
+      return request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp|gif)');
+    }
+
+    // Site branding (logo, favicon) — publicly readable; admin-only write.
+    // SVG is intentionally NOT allowed (script execution vector).
+    match /site/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && isSafeImage();
+    }
+
+    // Tool assets (logos, screenshots) — publicly readable; admin-only write.
+    match /tools/{toolId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && isSafeImage();
+    }
+
+    // User avatars — signed-in users can read, owners write their own only.
+    match /users/{userId}/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn()
+        && request.auth.uid == userId
+        && isSafeImage();
+    }
+
+    // Default deny on anything else — no catch-all read or write.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
